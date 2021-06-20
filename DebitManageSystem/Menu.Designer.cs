@@ -45,7 +45,7 @@
             // EndButton
             // 
             this.EndButton.Font = new System.Drawing.Font("Meiryo UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.EndButton.Location = new System.Drawing.Point(676, 403);
+            this.EndButton.Location = new System.Drawing.Point(330, 403);
             this.EndButton.Name = "EndButton";
             this.EndButton.Size = new System.Drawing.Size(112, 35);
             this.EndButton.TabIndex = 1;
@@ -72,6 +72,7 @@
             this.DepartManagebutton.TabIndex = 3;
             this.DepartManagebutton.Text = "部門管理";
             this.DepartManagebutton.UseVisualStyleBackColor = true;
+            this.DepartManagebutton.Click += new System.EventHandler(this.DepartManagebutton_Click);
             // 
             // label1
             // 
@@ -89,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(454, 450);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DepartManagebutton);
             this.Controls.Add(this.ClientManageButton);

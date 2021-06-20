@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace DebitManageSystem
 {
-    public partial class Menu : Form
+    public partial class Menu : BaseForm
     {
         public Menu()
         {
@@ -62,6 +62,23 @@ namespace DebitManageSystem
 
         }
 
+        /// <summary>
+        /// 部門管理画面を表示する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DepartManagebutton_Click(object sender, EventArgs e)
+        {
+
+            this.Visible = false;
+
+            var departMentForm = new DepartManageForm();
+
+            departMentForm.ShowDialog();
+
+            this.Visible = true;
+
+        }
 
     }
 }

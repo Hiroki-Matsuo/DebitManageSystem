@@ -10,16 +10,14 @@ using System.Windows.Forms;
 
 namespace DebitManageSystem
 {
-    public partial class DepartManageForm : BaseForm
+    public partial class BaseForm : Form
     {
-        public DepartManageForm()
+        public BaseForm()
         {
             InitializeComponent();
         }
 
-        private void EndButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+
+
     }
 }
