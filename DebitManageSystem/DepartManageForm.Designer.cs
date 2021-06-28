@@ -106,6 +106,7 @@
             this.UpdateButton.TabIndex = 7;
             this.UpdateButton.Text = "登録/更新";
             this.UpdateButton.UseVisualStyleBackColor = true;
+            this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // EndButton
             // 
