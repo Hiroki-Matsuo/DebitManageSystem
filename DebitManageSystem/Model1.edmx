@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="debit_schemaModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="client_table">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="client_name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="debit_table">
+          <Key>
+            <PropertyRef Name="debit_id" />
+          </Key>
+          <Property Name="debit_id" Type="int" Nullable="false" />
+          <Property Name="depart_cd" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="debit_limited" Type="int" />
+          <Property Name="debit_rank" Type="varchar" MaxLength="2" />
+          <Property Name="debit_deadline" Type="date" />
+        </EntityType>
+        <EntityType Name="depart_table">
+          <Key>
+            <PropertyRef Name="depart_cd" />
+          </Key>
+          <Property Name="depart_cd" Type="int" Nullable="false" />
+          <Property Name="depart_name" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <Association Name="client_cd_key">
+          <End Role="client_table" Type="Self.client_table" Multiplicity="1" />
+          <End Role="debit_table" Type="Self.debit_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client_table">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="debit_table">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="depart_cd_key">
+          <End Role="depart_table" Type="Self.depart_table" Multiplicity="1" />
+          <End Role="debit_table" Type="Self.debit_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="depart_table">
+              <PropertyRef Name="depart_cd" />
+            </Principal>
+            <Dependent Role="debit_table">
+              <PropertyRef Name="depart_cd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="debit_schemaModelStoreContainer">
+          <EntitySet Name="client_table" EntityType="Self.client_table" Schema="debit_schema" store:Type="Tables" />
+          <EntitySet Name="debit_table" EntityType="Self.debit_table" Schema="debit_schema" store:Type="Tables" />
+          <EntitySet Name="depart_table" EntityType="Self.depart_table" Schema="debit_schema" store:Type="Tables" />
+          <AssociationSet Name="client_cd_key" Association="Self.client_cd_key">
+            <End Role="client_table" EntitySet="client_table" />
+            <End Role="debit_table" EntitySet="debit_table" />
+          </AssociationSet>
+          <AssociationSet Name="depart_cd_key" Association="Self.depart_cd_key">
+            <End Role="depart_table" EntitySet="depart_table" />
+            <End Role="debit_table" EntitySet="debit_table" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="debit_schemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="client_table">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="client_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="debit_table" Relationship="Self.client_cd_key" FromRole="client_table" ToRole="debit_table" />
+        </EntityType>
+        <EntityType Name="debit_table">
+          <Key>
+            <PropertyRef Name="debit_id" />
+          </Key>
+          <Property Name="debit_id" Type="Int32" Nullable="false" />
+          <Property Name="depart_cd" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="debit_limited" Type="Int32" />
+          <Property Name="debit_rank" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="debit_deadline" Type="DateTime" />
+          <NavigationProperty Name="client_table" Relationship="Self.client_cd_key" FromRole="debit_table" ToRole="client_table" />
+          <NavigationProperty Name="depart_table" Relationship="Self.depart_cd_key" FromRole="debit_table" ToRole="depart_table" />
+        </EntityType>
+        <EntityType Name="depart_table">
+          <Key>
+            <PropertyRef Name="depart_cd" />
+          </Key>
+          <Property Name="depart_cd" Type="Int32" Nullable="false" />
+          <Property Name="depart_name" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="debit_table" Relationship="Self.depart_cd_key" FromRole="depart_table" ToRole="debit_table" />
+        </EntityType>
+        <Association Name="client_cd_key">
+          <End Role="client_table" Type="Self.client_table" Multiplicity="1" />
+          <End Role="debit_table" Type="Self.debit_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client_table">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="debit_table">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="depart_cd_key">
+          <End Role="depart_table" Type="Self.depart_table" Multiplicity="1" />
+          <End Role="debit_table" Type="Self.debit_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="depart_table">
+              <PropertyRef Name="depart_cd" />
+            </Principal>
+            <Dependent Role="debit_table">
+              <PropertyRef Name="depart_cd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="debit_schemaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="client_table" EntityType="Self.client_table" />
+          <EntitySet Name="debit_table" EntityType="Self.debit_table" />
+          <EntitySet Name="depart_table" EntityType="Self.depart_table" />
+          <AssociationSet Name="client_cd_key" Association="Self.client_cd_key">
+            <End Role="client_table" EntitySet="client_table" />
+            <End Role="debit_table" EntitySet="debit_table" />
+          </AssociationSet>
+          <AssociationSet Name="depart_cd_key" Association="Self.depart_cd_key">
+            <End Role="depart_table" EntitySet="depart_table" />
+            <End Role="debit_table" EntitySet="debit_table" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="debit_schemaModelStoreContainer" CdmEntityContainer="debit_schemaEntities">
+          <EntitySetMapping Name="client_table">
+            <EntityTypeMapping TypeName="debit_schemaModel.client_table">
+              <MappingFragment StoreEntitySet="client_table">
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="client_name" ColumnName="client_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="debit_table">
+            <EntityTypeMapping TypeName="debit_schemaModel.debit_table">
+              <MappingFragment StoreEntitySet="debit_table">
+                <ScalarProperty Name="debit_id" ColumnName="debit_id" />
+                <ScalarProperty Name="depart_cd" ColumnName="depart_cd" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="debit_limited" ColumnName="debit_limited" />
+                <ScalarProperty Name="debit_rank" ColumnName="debit_rank" />
+                <ScalarProperty Name="debit_deadline" ColumnName="debit_deadline" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="depart_table">
+            <EntityTypeMapping TypeName="debit_schemaModel.depart_table">
+              <MappingFragment StoreEntitySet="depart_table">
+                <ScalarProperty Name="depart_cd" ColumnName="depart_cd" />
+                <ScalarProperty Name="depart_name" ColumnName="depart_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="なし" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

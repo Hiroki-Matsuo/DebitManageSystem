@@ -19,10 +19,6 @@ namespace DebitManageSystem
             InitializeComponent();
         }
 
-
-
-
-
         private void EndButton_Click(object sender, EventArgs e)
         {
             this.Close();
