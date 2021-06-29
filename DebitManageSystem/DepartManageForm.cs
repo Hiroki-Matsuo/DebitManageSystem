@@ -14,6 +14,8 @@ namespace DebitManageSystem
 {
     public partial class DepartManageForm : BaseForm
     {
+        DepartTableDAO departTableDAO = new DepartTableDAO();
+
         public DepartManageForm()
         {
             InitializeComponent();
@@ -33,44 +35,22 @@ namespace DebitManageSystem
         {
 
             //まず登録処理を実装する
-            string insertSql = $"INSERT INTO debit_schema.depart_table (depart_cd, depart_name) VALUES(" + DepartId_DisplayTextBox.Text + ", '" + DepartNameTextBox.Text + "');";
+            departTableDAO.InsertDepartRecord(Int32.Parse(DepartId_DisplayTextBox.Text), DepartNameTextBox.Text);
 
-            string connstr = "userid=root; Port=3306; password=Localhost123; database=debit_schema; Host=localhost";
 
-            try
-            {
+            //テキストボックスから消す
+            DepartId_DisplayTextBox.Text = "";
+            DepartNameTextBox.Text = "";
+            
+        }
 
-                using (MySqlConnection conn = new MySqlConnection(connstr))
-                    using(var command = new MySqlCommand())
-                {
+        private void SearchButton_Click(object sender, EventArgs e)
+        {
 
-                    conn.Open();
-                    // datatableを設定
-                    DataTable dt = new DataTable();
+            DepartNameTextBox.Text = departTableDAO.SelectDepartNameForCode(Int32.Parse(DepartId_SearchTextBox.Text));
 
-                    // SQL文と接続情報を指定し、データアダプタを作成
-                    command.Connection = conn;
-                    command.CommandText = insertSql;
+            DepartId_DisplayTextBox.Text = DepartId_SearchTextBox.Text;
 
-                    var result = command.ExecuteNonQuery();
-
-                    conn.Close();
-                }
-
-                //テキストボックスから消す
-                DepartId_DisplayTextBox.Text = "";
-                DepartNameTextBox.Text = "";
-            }
-            catch(Exception e1)
-            {
-                Console.WriteLine(e1.Message);
-            }
-            finally
-            {
-
-                MessageBox.Show("処理を実行しました。");
-
-            }
         }
     }
 }

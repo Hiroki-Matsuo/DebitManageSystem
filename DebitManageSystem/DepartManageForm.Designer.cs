@@ -65,6 +65,7 @@
             this.SearchButton.TabIndex = 2;
             this.SearchButton.Text = "検索";
             this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // label1
             // 

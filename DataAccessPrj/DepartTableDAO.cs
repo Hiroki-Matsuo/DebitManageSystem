@@ -15,5 +15,14 @@ namespace DataAccessPrj
 
         }
 
+        public string SelectDepartName(int debitCd)
+        {
+
+            var entity = new 
+
+        }
+
+
+
     }
 }

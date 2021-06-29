@@ -122,6 +122,7 @@
     <Compile Include="BaseForm.Designer.cs">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DepartTableDAO.cs" />
     <Compile Include="depart_table.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
