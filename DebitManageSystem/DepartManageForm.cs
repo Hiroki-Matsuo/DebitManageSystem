@@ -34,9 +34,43 @@ namespace DebitManageSystem
         private void UpdateButton_Click(object sender, EventArgs e)
         {
 
-            //まず登録処理を実装する
-            departTableDAO.InsertDepartRecord(Int32.Parse(DepartId_DisplayTextBox.Text), DepartNameTextBox.Text);
+            var checkRes = departTableDAO.SelectDepartNameForCode(Int32.Parse(DepartId_DisplayTextBox.Text));
 
+            var message = "";
+
+            if (checkRes == null)
+            {
+                //登録処理
+                var result = departTableDAO.InsertDepartRecord(Int32.Parse(DepartId_DisplayTextBox.Text), DepartNameTextBox.Text);
+
+                if (result != 1)
+                {
+
+                    message  = "登録エラーです。";
+
+                    return;
+
+                }
+
+                message = "登録完了しました。";
+            }
+            else
+            {//更新処理
+
+                var result = departTableDAO.UpdateDepartRecord(Int32.Parse(DepartId_DisplayTextBox.Text), DepartNameTextBox.Text);
+
+                if(result != 1)
+                {
+                    message = "更新エラーです。";
+
+                    return;
+                }
+
+                message = "登録完了しました。";
+
+            }
+
+            MessageBox.Show(message);
 
             //テキストボックスから消す
             DepartId_DisplayTextBox.Text = "";
@@ -47,10 +81,17 @@ namespace DebitManageSystem
         private void SearchButton_Click(object sender, EventArgs e)
         {
 
-            DepartNameTextBox.Text = departTableDAO.SelectDepartNameForCode(Int32.Parse(DepartId_SearchTextBox.Text));
+             var result= departTableDAO.SelectDepartNameForCode(Int32.Parse(DepartId_SearchTextBox.Text));
 
-            DepartId_DisplayTextBox.Text = DepartId_SearchTextBox.Text;
-
+            if (result != null)
+            {
+                DepartNameTextBox.Text = result.depart_name;
+                DepartId_DisplayTextBox.Text = DepartId_SearchTextBox.Text;
+            }
+            else
+            {
+                MessageBox.Show("IDが存在しませんでした。");
+            }
         }
     }
 }
