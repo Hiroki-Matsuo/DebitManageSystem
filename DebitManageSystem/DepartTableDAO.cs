@@ -22,6 +22,9 @@ namespace DebitManageSystem
         // データ登録SQL
         private static readonly string InsertTableSql = $"INSERT INTO {Database}.depart_table (depart_cd, depart_name) VALUES (@depart_cd, @depart_name)";
 
+        // データ登録SQL
+        private static readonly string UpdateTableSql = $"Update {Database}.depart_table SET depart_name = @depart_name WHERE depart_cd = @depart_cd";
+
         public int InsertDepartRecord(int cd, string name)
         {
 
@@ -78,23 +81,26 @@ namespace DebitManageSystem
 
             var result = 99;
 
-            using(debit_schemaEntities ent = new debit_schemaEntities())
+            using (var conn = new MySqlConnection(ConnectionString))
+            using (var comm = new MySqlCommand())
             {
 
-                var departData = ent.depart_table.Single(x => x.depart_cd == cd);
+                conn.Open();
 
-                departData.depart_name = name;
+                //SQLへ格納
+                comm.Connection = conn;
+                comm.CommandText = UpdateTableSql;
 
-                result = ent.SaveChanges();
+                //パラメータを格納
+                comm.Parameters.AddWithValue("@depart_cd", cd);
+                comm.Parameters.AddWithValue("@depart_name", name);
 
+                result = comm.ExecuteNonQuery();
             }
 
             return result;
 
-
         }
-
-
 
     }
 }
