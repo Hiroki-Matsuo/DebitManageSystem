@@ -36,8 +36,7 @@ namespace DebitManageSystem
 
             var checkRes = departTableDAO.SelectDepartNameForCode(Int32.Parse(DepartId_DisplayTextBox.Text));
 
-            var message = "";
-
+            string message;
             if (checkRes == null)
             {
                 //登録処理

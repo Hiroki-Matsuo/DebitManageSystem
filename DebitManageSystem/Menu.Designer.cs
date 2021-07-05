@@ -37,7 +37,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(153, 334);
+            this.textBox1.Location = new System.Drawing.Point(234, 39);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(154, 19);
             this.textBox1.TabIndex = 0;
@@ -56,19 +56,20 @@
             // ClientManageButton
             // 
             this.ClientManageButton.Font = new System.Drawing.Font("Meiryo UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.ClientManageButton.Location = new System.Drawing.Point(61, 175);
+            this.ClientManageButton.Location = new System.Drawing.Point(61, 140);
             this.ClientManageButton.Name = "ClientManageButton";
             this.ClientManageButton.Size = new System.Drawing.Size(126, 45);
             this.ClientManageButton.TabIndex = 2;
             this.ClientManageButton.Text = "取引先管理";
             this.ClientManageButton.UseVisualStyleBackColor = true;
+            this.ClientManageButton.Click += new System.EventHandler(this.ClientManageButton_Click);
             // 
             // DepartManagebutton
             // 
             this.DepartManagebutton.Font = new System.Drawing.Font("Meiryo UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.DepartManagebutton.Location = new System.Drawing.Point(61, 248);
+            this.DepartManagebutton.Location = new System.Drawing.Point(234, 140);
             this.DepartManagebutton.Name = "DepartManagebutton";
-            this.DepartManagebutton.Size = new System.Drawing.Size(126, 46);
+            this.DepartManagebutton.Size = new System.Drawing.Size(126, 45);
             this.DepartManagebutton.TabIndex = 3;
             this.DepartManagebutton.Text = "部門管理";
             this.DepartManagebutton.UseVisualStyleBackColor = true;

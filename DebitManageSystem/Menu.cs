@@ -31,8 +31,6 @@ namespace DebitManageSystem
         }
 
 
-            
-
         public void button1_Click(object sender, EventArgs e)
         {
 
@@ -72,13 +70,25 @@ namespace DebitManageSystem
 
             this.Visible = false;
 
-            var departMentForm = new DepartManageForm();
+            var departManageForm = new DepartManageForm();
 
-            departMentForm.ShowDialog();
+            departManageForm.ShowDialog();
 
             this.Visible = true;
 
         }
 
+        private void ClientManageButton_Click(object sender, EventArgs e)
+        {
+
+            this.Visible = false;
+
+            var clientManageForm = new ClientManageForm();
+
+            clientManageForm.ShowDialog();
+
+            Visible = true;
+
+        }
     }
 }
