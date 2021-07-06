@@ -78,6 +78,11 @@ namespace DebitManageSystem
 
         }
 
+        /// <summary>
+        /// 取引先管理画面を表示する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClientManageButton_Click(object sender, EventArgs e)
         {
 

@@ -58,6 +58,7 @@ namespace DebitManageSystem
             this.UpdateButton.TabIndex = 16;
             this.UpdateButton.Text = "登録/更新";
             this.UpdateButton.UseVisualStyleBackColor = true;
+            this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // ClientNameTextBox
             // 
@@ -99,6 +100,7 @@ namespace DebitManageSystem
             this.SearchButton.TabIndex = 11;
             this.SearchButton.Text = "検索";
             this.SearchButton.UseVisualStyleBackColor = true;
+            this.SearchButton.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // ClientId_SearchTextBox
             // 
