@@ -54,7 +54,7 @@ namespace DebitManageSystem
 
             //メッセージを格納
             string message;
-
+            MessageBoxIcon msgStyle = MessageBoxIcon.Information;
             if (checkRes == null)
             {
                 //登録処理
@@ -64,11 +64,13 @@ namespace DebitManageSystem
                 {
 
                     message = "登録エラーです。";
+                    msgStyle = MessageBoxIcon.Error;
 
                 }
                 else
                 {
                     message = "登録完了しました。";
+                    msgStyle = MessageBoxIcon.Information;
                 }
             }
             else
@@ -79,18 +81,18 @@ namespace DebitManageSystem
                 if (result != 1)
                 {
                     message = "更新エラーです。";
-
+                    msgStyle = MessageBoxIcon.Error;
                 }
                 else
                 {
 
                     message = "登録完了しました。";
-
+                    msgStyle = MessageBoxIcon.Information;
                 }
 
             }
 
-            MessageBox.Show(message);
+            MessageBox.Show(message,"システム", MessageBoxButtons.OK, msgStyle);
 
             //テキストボックスから消す
             ClientId_DisplayTextBox.Text = "";

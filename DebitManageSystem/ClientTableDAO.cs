@@ -20,10 +20,10 @@ namespace DebitManageSystem
         // 接続文字列
         private static readonly string ConnectionString = $"Server={Server}; Port={Port}; Database={Database}; Uid={Uid}; Pwd={Pwd}";
         // データ登録SQL
-        private static readonly string InsertTableSql = $"INSERT INTO {Database}.client_table (client_cd, client_name) VALUES (@client_cd, @client_name)";
+        private static readonly string InsertTableSql = $"INSERT INTO {Database}.client_table (client_id, client_name) VALUES (@client_cd, @client_name)";
 
         // データ更新SQL
-        private static readonly string UpdateTableSql = $"Update {Database}.client_table SET client_name = @client_name WHERE client_cd = @client_cd";
+        private static readonly string UpdateTableSql = $"Update {Database}.client_table SET client_name = @client_name WHERE client_id = @client_cd";
 
         /// <summary>
         /// 登録処理
@@ -47,8 +47,8 @@ namespace DebitManageSystem
                 comm.CommandText = InsertTableSql;
 
                 //パラメータを格納
-                comm.Parameters.AddWithValue("@depart_cd", cd);
-                comm.Parameters.AddWithValue("@depart_name", name);
+                comm.Parameters.AddWithValue("@client_cd", cd);
+                comm.Parameters.AddWithValue("@client_name", name);
 
                 result = comm.ExecuteNonQuery();
 
@@ -72,7 +72,7 @@ namespace DebitManageSystem
             {
 
                 result = (from x in ent.client_table
-                          where x.client_cd == clientCd
+                          where x.client_id == clientCd
                           select x).FirstOrDefault();
 
             }
