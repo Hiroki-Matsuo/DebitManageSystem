@@ -95,5 +95,18 @@ namespace DebitManageSystem
             Visible = true;
 
         }
+
+        private void InputCSVButton_Click(object sender, EventArgs e)
+        {
+
+            this.Visible = false;
+
+            var inputCSVForm = new InputCSVForm();
+
+            inputCSVForm.ShowDialog();
+
+            Visible = true;
+
+        }
     }
 }
