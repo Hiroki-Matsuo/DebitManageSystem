@@ -36,7 +36,8 @@ namespace DebitManageSystem
             OpenFileDialog ofd = new OpenFileDialog();
 
             //ダイアログの設定する
-            ofd.FilterIndex = 2;
+
+            ofd.Filter = "CSVファイル(*.csv)|*.csv";
             ofd.CheckFileExists = true;
             ofd.CheckPathExists = true;
 
@@ -46,6 +47,16 @@ namespace DebitManageSystem
 
                 FilePathTextBox.Text = ofd.FileName;
             }
+
+        }
+
+        /// <summary>
+        /// CSVを取り込み、データを持った上で画面のDataGridViewに表示する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExecuteButton_Click(object sender, EventArgs e)
+        {
 
         }
     }
