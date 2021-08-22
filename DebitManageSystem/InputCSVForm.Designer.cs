@@ -29,13 +29,18 @@ namespace DebitManageSystem
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.FilePathTextBox = new System.Windows.Forms.TextBox();
             this.SearchFilePathButton = new System.Windows.Forms.Button();
             this.EndButton = new System.Windows.Forms.Button();
-            this.ExecuteButton = new System.Windows.Forms.Button();
+            this.InputButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.debitInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.subjectNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.debitInfoBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -74,24 +79,45 @@ namespace DebitManageSystem
             this.EndButton.UseVisualStyleBackColor = true;
             this.EndButton.Click += new System.EventHandler(this.EndButton_Click);
             // 
-            // ExecuteButton
+            // InputButton
             // 
-            this.ExecuteButton.Location = new System.Drawing.Point(492, 26);
-            this.ExecuteButton.Name = "ExecuteButton";
-            this.ExecuteButton.Size = new System.Drawing.Size(89, 30);
-            this.ExecuteButton.TabIndex = 4;
-            this.ExecuteButton.Text = "処理実行";
-            this.ExecuteButton.UseVisualStyleBackColor = true;
-            this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
+            this.InputButton.Location = new System.Drawing.Point(492, 26);
+            this.InputButton.Name = "InputButton";
+            this.InputButton.Size = new System.Drawing.Size(89, 30);
+            this.InputButton.TabIndex = 4;
+            this.InputButton.Text = "処理実行";
+            this.InputButton.UseVisualStyleBackColor = true;
+            this.InputButton.Click += new System.EventHandler(this.InputButton_Click);
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.iDDataGridViewTextBoxColumn,
+            this.subjectNameDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.debitInfoBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(22, 74);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 21;
             this.dataGridView1.Size = new System.Drawing.Size(787, 311);
             this.dataGridView1.TabIndex = 5;
+            // 
+            // debitInfoBindingSource
+            // 
+            this.debitInfoBindingSource.DataSource = typeof(DebitManageSystem.DebitInfo);
+            // 
+            // iDDataGridViewTextBoxColumn
+            // 
+            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            // 
+            // subjectNameDataGridViewTextBoxColumn
+            // 
+            this.subjectNameDataGridViewTextBoxColumn.DataPropertyName = "SubjectName";
+            this.subjectNameDataGridViewTextBoxColumn.HeaderText = "SubjectName";
+            this.subjectNameDataGridViewTextBoxColumn.Name = "subjectNameDataGridViewTextBoxColumn";
             // 
             // InputCSVForm
             // 
@@ -99,14 +125,16 @@ namespace DebitManageSystem
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 462);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.ExecuteButton);
+            this.Controls.Add(this.InputButton);
             this.Controls.Add(this.EndButton);
             this.Controls.Add(this.SearchFilePathButton);
             this.Controls.Add(this.FilePathTextBox);
             this.Controls.Add(this.label1);
             this.Name = "InputCSVForm";
             this.Text = "CSV取込画面";
+            this.Load += new System.EventHandler(this.InputCSVForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.debitInfoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,7 +146,10 @@ namespace DebitManageSystem
         private System.Windows.Forms.TextBox FilePathTextBox;
         private System.Windows.Forms.Button SearchFilePathButton;
         private System.Windows.Forms.Button EndButton;
-        private System.Windows.Forms.Button ExecuteButton;
+        private System.Windows.Forms.Button InputButton;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn subjectNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource debitInfoBindingSource;
     }
 }

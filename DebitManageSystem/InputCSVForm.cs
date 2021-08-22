@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,9 @@ namespace DebitManageSystem
 {
     public partial class InputCSVForm : BaseForm
     {
+        private List<DebitInfo> Subjects;
+        BindingSource bindingSource;
+
         public InputCSVForm()
         {
             InitializeComponent();
@@ -55,8 +59,47 @@ namespace DebitManageSystem
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ExecuteButton_Click(object sender, EventArgs e)
+        private void InputButton_Click(object sender, EventArgs e)
         {
+
+            //CSVファイルのパスを開く
+            StreamReader reader = new StreamReader(FilePathTextBox.Text);
+            {
+
+                // 配列からリストに格納する
+
+                // 末尾まで繰り返す
+                while (!reader.EndOfStream)
+                {
+                    // CSVファイルの一行を読み込む
+                    string line = reader.ReadLine();
+                    // 読み込んだ一行をカンマ毎に分けて配列に格納する
+                    string[] values = line.Split(',');
+
+                    DebitInfo debitInfo = new DebitInfo();
+
+                    debitInfo.ID = int.Parse(values[0]);
+                    debitInfo.SubjectName = values[1];
+
+
+                    Subjects.Add(debitInfo);
+                }
+
+                dataGridView1.DataSource = Subjects;
+
+
+            }
+
+        }
+
+        private void InputCSVForm_Load(object sender, EventArgs e)
+        {
+
+            Subjects = new List<DebitInfo>();
+
+            bindingSource = new BindingSource(Subjects, string.Empty);
+
+            dataGridView1.DataSource = bindingSource;
 
         }
     }
