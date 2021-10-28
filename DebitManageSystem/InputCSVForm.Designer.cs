@@ -36,9 +36,10 @@ namespace DebitManageSystem
             this.EndButton = new System.Windows.Forms.Button();
             this.InputButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.debitInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.subjectNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.debitInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ExecuteButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.debitInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -85,7 +86,7 @@ namespace DebitManageSystem
             this.InputButton.Name = "InputButton";
             this.InputButton.Size = new System.Drawing.Size(89, 30);
             this.InputButton.TabIndex = 4;
-            this.InputButton.Text = "処理実行";
+            this.InputButton.Text = "データ表示";
             this.InputButton.UseVisualStyleBackColor = true;
             this.InputButton.Click += new System.EventHandler(this.InputButton_Click);
             // 
@@ -103,10 +104,6 @@ namespace DebitManageSystem
             this.dataGridView1.Size = new System.Drawing.Size(787, 311);
             this.dataGridView1.TabIndex = 5;
             // 
-            // debitInfoBindingSource
-            // 
-            this.debitInfoBindingSource.DataSource = typeof(DebitManageSystem.DebitInfo);
-            // 
             // iDDataGridViewTextBoxColumn
             // 
             this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
@@ -119,11 +116,26 @@ namespace DebitManageSystem
             this.subjectNameDataGridViewTextBoxColumn.HeaderText = "SubjectName";
             this.subjectNameDataGridViewTextBoxColumn.Name = "subjectNameDataGridViewTextBoxColumn";
             // 
+            // debitInfoBindingSource
+            // 
+            this.debitInfoBindingSource.DataSource = typeof(DebitManageSystem.DebitInfo);
+            // 
+            // ExecuteButton
+            // 
+            this.ExecuteButton.Location = new System.Drawing.Point(621, 26);
+            this.ExecuteButton.Name = "ExecuteButton";
+            this.ExecuteButton.Size = new System.Drawing.Size(89, 30);
+            this.ExecuteButton.TabIndex = 6;
+            this.ExecuteButton.Text = "更新";
+            this.ExecuteButton.UseVisualStyleBackColor = true;
+            this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
+            // 
             // InputCSVForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 462);
+            this.Controls.Add(this.ExecuteButton);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.InputButton);
             this.Controls.Add(this.EndButton);
@@ -151,5 +163,6 @@ namespace DebitManageSystem
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn subjectNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource debitInfoBindingSource;
+        private System.Windows.Forms.Button ExecuteButton;
     }
 }

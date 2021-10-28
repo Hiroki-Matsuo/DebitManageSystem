@@ -87,6 +87,7 @@ namespace DebitManageSystem
 
                 dataGridView1.DataSource = Subjects;
 
+                ExecuteButton.Enabled = true;
 
             }
 
@@ -100,6 +101,22 @@ namespace DebitManageSystem
             bindingSource = new BindingSource(Subjects, string.Empty);
 
             dataGridView1.DataSource = bindingSource;
+
+            //更新ボタンはInput前で使用不可の状態にする
+            ExecuteButton.Enabled = false;
+
+        }
+
+
+        /// <summary>
+        /// 表示しているデータをDBに連携する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExecuteButton_Click(object sender, EventArgs e)
+        {
+
+
 
         }
     }
