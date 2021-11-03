@@ -25,6 +25,18 @@ namespace DebitManageSystem
         // データ更新SQL
         private static readonly string UpdateTableSql = $"Update {Database}.client_table SET client_name = @client_name WHERE client_id = @client_cd";
 
+        // 複数更新SQL
+        private static readonly string UpdateRecordsSql_Former = $"Update {Database}.client_table SET client_name = CASE client_id ";
+
+        private static readonly string UpdateRecordsSql_Later = "END WHERE client_id IN ";
+
+        //private static readonly string WhenQuery = "WHEN client_name THEN ";
+
+        // WHEN client_name THEN 'client_name' 
+        //
+        //@client_name WHERE client_id = @client_cd";
+
+
         /// <summary>
         /// 登録処理
         /// </summary>
@@ -114,6 +126,57 @@ namespace DebitManageSystem
         }
 
 
+        public int UpdateDepartSomeRecords(List<DebitInfo> debitInfos)
+        {
+
+            var result = 99;
+
+
+            // WHEN client_name THEN 'client_name' 
+
+            var whenQueries = "";
+
+            var idList = "(";
+
+            foreach(DebitInfo info in debitInfos)
+            {
+
+                whenQueries = whenQueries + "WHEN " + info.ID + " THEN " + "'"+ info.SubjectName + "' ";
+
+                if(idList.Equals("("))
+                {
+                    idList = idList + info.ID + " ";
+
+                }
+                else
+                {
+                    idList =  idList+ ", " + info.ID + " ";
+
+                }
+
+            }
+
+            idList = idList + ")";
+
+
+            var query = UpdateRecordsSql_Former + whenQueries + UpdateRecordsSql_Later + idList;
+
+
+            using (var conn = new MySqlConnection(ConnectionString))
+            using (var comm = new MySqlCommand())
+            {
+
+                conn.Open();
+
+                //SQLへ格納
+                comm.Connection = conn;
+                comm.CommandText = query;
+
+                result = comm.ExecuteNonQuery();
+            }
+
+            return result;
+        }
 
 
 

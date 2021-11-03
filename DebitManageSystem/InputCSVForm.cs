@@ -11,22 +11,28 @@ using System.Windows.Forms;
 
 namespace DebitManageSystem
 {
-    public partial class InputCSVForm : BaseForm
+    public partial class InputCSVForm : ListBaseForm
     {
         private List<DebitInfo> Subjects;
         BindingSource bindingSource;
 
+        ClientTableDAO clientTableDAO = new ClientTableDAO();
+
+
+
         public InputCSVForm()
         {
             InitializeComponent();
+
+            //ファイルのデータをそのまま更新する機能のため
+            ListGridView.AllowUserToAddRows = false;
+            ListGridView.AllowUserToDeleteRows = false;
+            ListGridView.ReadOnly = true;
+
+
         }
 
 
-        private void EndButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-
-        }
 
         /// <summary>
         /// ダイアログを開き、ファイルを選択する
@@ -85,7 +91,7 @@ namespace DebitManageSystem
                     Subjects.Add(debitInfo);
                 }
 
-                dataGridView1.DataSource = Subjects;
+                ListGridView.DataSource = Subjects;
 
                 ExecuteButton.Enabled = true;
 
@@ -100,7 +106,7 @@ namespace DebitManageSystem
 
             bindingSource = new BindingSource(Subjects, string.Empty);
 
-            dataGridView1.DataSource = bindingSource;
+            ListGridView.DataSource = bindingSource;
 
             //更新ボタンはInput前で使用不可の状態にする
             ExecuteButton.Enabled = false;
@@ -116,6 +122,9 @@ namespace DebitManageSystem
         private void ExecuteButton_Click(object sender, EventArgs e)
         {
 
+            var result = clientTableDAO.UpdateDepartSomeRecords(Subjects);
+
+            MessageBox.Show("結果：" + result , "システム", MessageBoxButtons.OK);
 
 
         }
