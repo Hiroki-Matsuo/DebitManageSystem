@@ -103,6 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IDAOBase.cs" />
     <Compile Include="DebitInfo.cs" />
     <Compile Include="ClientTableDAO.cs" />
     <Compile Include="client_table.cs">

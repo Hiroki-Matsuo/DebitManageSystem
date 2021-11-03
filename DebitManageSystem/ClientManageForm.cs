@@ -32,7 +32,7 @@ namespace DebitManageSystem
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
-            var result = clientTableDAO.SelectDepartNameForCode(Int32.Parse(ClientId_SearchTextBox.Text));
+            var result = clientTableDAO.SelectNameForCode(Int32.Parse(ClientId_SearchTextBox.Text));
 
             if (result != null)
             {
@@ -50,7 +50,7 @@ namespace DebitManageSystem
         {
 
             //CDがテーブルに存在するかチェック
-            var checkRes = clientTableDAO.SelectDepartNameForCode(Int32.Parse(ClientId_DisplayTextBox.Text));
+            var checkRes = clientTableDAO.SelectNameForCode(Int32.Parse(ClientId_DisplayTextBox.Text));
 
             //メッセージを格納
             string message;
@@ -58,7 +58,7 @@ namespace DebitManageSystem
             if (checkRes == null)
             {
                 //登録処理
-                var result = clientTableDAO.InsertDepartRecord(Int32.Parse(ClientId_DisplayTextBox.Text), ClientNameTextBox.Text);
+                var result = clientTableDAO.InsertRecord(Int32.Parse(ClientId_DisplayTextBox.Text), ClientNameTextBox.Text);
 
                 if (result != 1)
                 {
@@ -76,7 +76,7 @@ namespace DebitManageSystem
             else
             {//更新処理
 
-                var result = clientTableDAO.UpdateDepartRecord(Int32.Parse(ClientId_DisplayTextBox.Text), ClientNameTextBox.Text);
+                var result = clientTableDAO.UpdateRecord(Int32.Parse(ClientId_DisplayTextBox.Text), ClientNameTextBox.Text);
 
                 if (result != 1)
                 {

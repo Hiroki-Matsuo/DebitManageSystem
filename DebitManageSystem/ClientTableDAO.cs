@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace DebitManageSystem
 {
-    class ClientTableDAO
+    class ClientTableDAO :IDAOBase, IDebitDAO
     {
         //文字列
         private static readonly string Server = "localhost";      // ホスト名
@@ -43,7 +43,7 @@ namespace DebitManageSystem
         /// <param name="cd"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public int InsertDepartRecord(int cd, string name)
+        public int InsertRecord(int cd, string name)
         {
 
             var result = 99;
@@ -73,9 +73,9 @@ namespace DebitManageSystem
         /// <summary>
         /// 取引先コードを元に検索する
         /// </summary>
-        /// <param name="clientCd"></param>
+        /// <param name="cd"></param>
         /// <returns></returns>
-        public client_table SelectDepartNameForCode(int clientCd)
+        public client_table SelectNameForCode(int cd)
         {
 
             var result = new client_table();
@@ -84,7 +84,7 @@ namespace DebitManageSystem
             {
 
                 result = (from x in ent.client_table
-                          where x.client_id == clientCd
+                          where x.client_id == cd
                           select x).FirstOrDefault();
 
             }
@@ -99,7 +99,7 @@ namespace DebitManageSystem
         /// <param name="cd"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        public int UpdateDepartRecord(int cd, string name)
+        public int UpdateRecord(int cd, string name)
         {
 
             var result = 99;
@@ -126,7 +126,7 @@ namespace DebitManageSystem
         }
 
 
-        public int UpdateDepartSomeRecords(List<DebitInfo> debitInfos)
+        public int UpdateSomeDebitRecords(List<DebitInfo> debitInfos)
         {
 
             var result = 99;

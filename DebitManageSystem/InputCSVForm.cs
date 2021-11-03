@@ -16,10 +16,6 @@ namespace DebitManageSystem
         private List<DebitInfo> Subjects;
         BindingSource bindingSource;
 
-        ClientTableDAO clientTableDAO = new ClientTableDAO();
-
-
-
         public InputCSVForm()
         {
             InitializeComponent();
@@ -113,7 +109,6 @@ namespace DebitManageSystem
 
         }
 
-
         /// <summary>
         /// 表示しているデータをDBに連携する
         /// </summary>
@@ -122,10 +117,11 @@ namespace DebitManageSystem
         private void ExecuteButton_Click(object sender, EventArgs e)
         {
 
-            var result = clientTableDAO.UpdateDepartSomeRecords(Subjects);
+            IDAOBase dao = new ClientTableDAO();
+
+            var result = dao.UpdateSomeDebitRecords(Subjects);
 
             MessageBox.Show("結果：" + result , "システム", MessageBoxButtons.OK);
-
 
         }
     }
