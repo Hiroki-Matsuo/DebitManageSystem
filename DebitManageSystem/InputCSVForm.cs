@@ -25,7 +25,6 @@ namespace DebitManageSystem
             ListGridView.AllowUserToDeleteRows = false;
             ListGridView.ReadOnly = true;
 
-
         }
 
 
@@ -117,7 +116,16 @@ namespace DebitManageSystem
         private void ExecuteButton_Click(object sender, EventArgs e)
         {
 
-            IDAOBase dao = new ClientTableDAO();
+            IDAOBase dao;
+
+            if(ItemCombo.SelectedIndex == ((int)TableItem.取引先))
+            {
+                dao = new ClientTableDAO();
+            }
+            else
+            {
+                dao = new ClientTableDAO();
+            }
 
             var result = dao.UpdateSomeDebitRecords(Subjects);
 

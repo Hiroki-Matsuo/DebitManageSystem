@@ -17,10 +17,11 @@ namespace DebitManageSystem
 
     }
 
-    interface IDebitDAO
+    interface IClientDAO
     {
-
         client_table SelectNameForCode(int cd);
+
+
 
     }
 }

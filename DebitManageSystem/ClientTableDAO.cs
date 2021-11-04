@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace DebitManageSystem
 {
-    class ClientTableDAO :IDAOBase, IDebitDAO
+    class ClientTableDAO :IDAOBase, IClientDAO
     {
         //文字列
         private static readonly string Server = "localhost";      // ホスト名
@@ -30,12 +30,16 @@ namespace DebitManageSystem
 
         private static readonly string UpdateRecordsSql_Later = "END WHERE client_id IN ";
 
+        // データ登録SQL
+        private static readonly string InsertTableSqlIgnore = $"INSERT IGNORE INTO {Database}.client_table (client_id, client_name) VALUES ";
+
+        //(@client_cd, @client_name)
+
         //private static readonly string WhenQuery = "WHEN client_name THEN ";
 
         // WHEN client_name THEN 'client_name' 
         //
         //@client_name WHERE client_id = @client_cd";
-
 
         /// <summary>
         /// 登録処理
@@ -132,24 +136,34 @@ namespace DebitManageSystem
             var result = 99;
 
 
-            // WHEN client_name THEN 'client_name' 
+            var valueQueries = "";
 
+            //CASEのWHENとそれ以降
             var whenQueries = "";
 
+            //IN句
             var idList = "(";
 
+            //INSERTのVALUE句の作成
+            //CASE文とIN句の作成
             foreach(DebitInfo info in debitInfos)
             {
-
+ 
                 whenQueries = whenQueries + "WHEN " + info.ID + " THEN " + "'"+ info.SubjectName + "' ";
 
                 if(idList.Equals("("))
                 {
+
+                    valueQueries = valueQueries + "(" + info.ID + ", '" + info.SubjectName + "')";
+
                     idList = idList + info.ID + " ";
 
                 }
                 else
                 {
+
+                    valueQueries = valueQueries + ", (" + info.ID + ", '" + info.SubjectName + "')";
+
                     idList =  idList+ ", " + info.ID + " ";
 
                 }
@@ -158,27 +172,54 @@ namespace DebitManageSystem
 
             idList = idList + ")";
 
+            //挿入用（重複が合った場合はスルー）
+            var insertQuery = InsertTableSqlIgnore + valueQueries;
 
-            var query = UpdateRecordsSql_Former + whenQueries + UpdateRecordsSql_Later + idList;
-
+            //更新用
+            var updateQuery = UpdateRecordsSql_Former + whenQueries + UpdateRecordsSql_Later + idList;
 
             using (var conn = new MySqlConnection(ConnectionString))
             using (var comm = new MySqlCommand())
             {
 
-                conn.Open();
+                MySqlTransaction tran = null;
 
-                //SQLへ格納
-                comm.Connection = conn;
-                comm.CommandText = query;
+                try
+                {
+                    conn.Open();
 
-                result = comm.ExecuteNonQuery();
+                    tran = conn.BeginTransaction();
+
+                    //SQLへ格納
+                    comm.Connection = conn;
+
+                    comm.CommandText = insertQuery;
+
+                    //不存在のキーを挿入
+                    comm.ExecuteNonQuery();
+
+                    comm.CommandText = updateQuery;
+
+                    comm.ExecuteNonQuery();
+
+                    tran.Commit();
+
+                    result = 0;
+
+                }
+                catch(Exception e)
+                {
+
+                    tran.Rollback();
+
+                    Console.WriteLine("  Message: {0}", e.Message);
+
+                    result = 1;
+                }
             }
 
             return result;
         }
-
-
 
     }
 }
