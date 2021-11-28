@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DebitManageSystem
 {
-    class DebitInfo
+    class InputCSVInfo
     {
         int _ID;
         String _Subject;
@@ -16,7 +16,7 @@ namespace DebitManageSystem
             get { return this._ID; }
             set { this._ID = value; }
         }
-        public string SubjectName
+        public string Name
         {
             get { return this._Subject; }
             set { this._Subject = value; }

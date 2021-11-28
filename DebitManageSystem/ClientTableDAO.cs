@@ -130,7 +130,7 @@ namespace DebitManageSystem
         }
 
 
-        public int UpdateSomeDebitRecords(List<DebitInfo> debitInfos)
+        public int UpdateSomeDebitRecords(List<InputCSVInfo> debitInfos)
         {
 
             var result = 99;
@@ -146,15 +146,15 @@ namespace DebitManageSystem
 
             //INSERTのVALUE句の作成
             //CASE文とIN句の作成
-            foreach(DebitInfo info in debitInfos)
+            foreach(InputCSVInfo info in debitInfos)
             {
  
-                whenQueries = whenQueries + "WHEN " + info.ID + " THEN " + "'"+ info.SubjectName + "' ";
+                whenQueries = whenQueries + "WHEN " + info.ID + " THEN " + "'"+ info.Name + "' ";
 
                 if(idList.Equals("("))
                 {
 
-                    valueQueries = valueQueries + "(" + info.ID + ", '" + info.SubjectName + "')";
+                    valueQueries = valueQueries + "(" + info.ID + ", '" + info.Name + "')";
 
                     idList = idList + info.ID + " ";
 
@@ -162,7 +162,7 @@ namespace DebitManageSystem
                 else
                 {
 
-                    valueQueries = valueQueries + ", (" + info.ID + ", '" + info.SubjectName + "')";
+                    valueQueries = valueQueries + ", (" + info.ID + ", '" + info.Name + "')";
 
                     idList =  idList+ ", " + info.ID + " ";
 

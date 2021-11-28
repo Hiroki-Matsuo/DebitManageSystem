@@ -29,15 +29,19 @@ namespace DebitManageSystem
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.CSVLabel = new System.Windows.Forms.Label();
             this.FilePathTextBox = new System.Windows.Forms.TextBox();
             this.SearchFilePathButton = new System.Windows.Forms.Button();
             this.InputButton = new System.Windows.Forms.Button();
-            this.debitInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ExecuteButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.debitInfoBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // ItemCombo
+            // 
+            this.ItemCombo.Items.AddRange(new object[] {
+            "取引先",
+            "部門",
+            "与信情報"});
             // 
             // CSVLabel
             // 
@@ -75,10 +79,6 @@ namespace DebitManageSystem
             this.InputButton.UseVisualStyleBackColor = true;
             this.InputButton.Click += new System.EventHandler(this.InputButton_Click);
             // 
-            // debitInfoBindingSource
-            // 
-            this.debitInfoBindingSource.DataSource = typeof(DebitManageSystem.DebitInfo);
-            // 
             // ExecuteButton
             // 
             this.ExecuteButton.Location = new System.Drawing.Point(610, 58);
@@ -102,12 +102,14 @@ namespace DebitManageSystem
             this.Name = "InputCSVForm";
             this.Text = "CSV取込画面";
             this.Load += new System.EventHandler(this.InputCSVForm_Load);
+            this.Controls.SetChildIndex(this.EndButton, 0);
+            this.Controls.SetChildIndex(this.ItemCombo, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.CSVLabel, 0);
             this.Controls.SetChildIndex(this.FilePathTextBox, 0);
             this.Controls.SetChildIndex(this.SearchFilePathButton, 0);
             this.Controls.SetChildIndex(this.InputButton, 0);
             this.Controls.SetChildIndex(this.ExecuteButton, 0);
-            ((System.ComponentModel.ISupportInitialize)(this.debitInfoBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,7 +121,6 @@ namespace DebitManageSystem
         private System.Windows.Forms.TextBox FilePathTextBox;
         private System.Windows.Forms.Button SearchFilePathButton;
         private System.Windows.Forms.Button InputButton;
-        private System.Windows.Forms.BindingSource debitInfoBindingSource;
         private System.Windows.Forms.Button ExecuteButton;
     }
 }

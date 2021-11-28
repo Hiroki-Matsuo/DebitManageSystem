@@ -41,7 +41,7 @@ namespace DebitManageSystem
             if (checkRes == null)
             {
                 //登録処理
-                var result = departTableDAO.InsertDepartRecord(Int32.Parse(DepartId_DisplayTextBox.Text), DepartNameTextBox.Text);
+                var result = departTableDAO.InsertRecord(Int32.Parse(DepartId_DisplayTextBox.Text), DepartNameTextBox.Text);
 
                 if (result != 1)
                 {
@@ -59,7 +59,7 @@ namespace DebitManageSystem
             else
             {//更新処理
 
-                var result = departTableDAO.UpdateDepartRecord(Int32.Parse(DepartId_DisplayTextBox.Text), DepartNameTextBox.Text);
+                var result = departTableDAO.UpdateRecord(Int32.Parse(DepartId_DisplayTextBox.Text), DepartNameTextBox.Text);
 
                 if(result != 1)
                 {

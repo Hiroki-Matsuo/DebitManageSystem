@@ -13,7 +13,8 @@ namespace DebitManageSystem
 {
     public partial class InputCSVForm : ListBaseForm
     {
-        private List<DebitInfo> Subjects;
+        private List<InputCSVInfo> InputRecords;
+
         BindingSource bindingSource;
 
         public InputCSVForm()
@@ -26,8 +27,6 @@ namespace DebitManageSystem
             ListGridView.ReadOnly = true;
 
         }
-
-
 
         /// <summary>
         /// ダイアログを開き、ファイルを選択する
@@ -77,16 +76,16 @@ namespace DebitManageSystem
                     // 読み込んだ一行をカンマ毎に分けて配列に格納する
                     string[] values = line.Split(',');
 
-                    DebitInfo debitInfo = new DebitInfo();
+                    var debitInfo = new InputCSVInfo();
 
                     debitInfo.ID = int.Parse(values[0]);
-                    debitInfo.SubjectName = values[1];
+                    debitInfo.Name = values[1];
 
 
-                    Subjects.Add(debitInfo);
+                    InputRecords.Add(debitInfo);
                 }
 
-                ListGridView.DataSource = Subjects;
+                ListGridView.DataSource = InputRecords;
 
                 ExecuteButton.Enabled = true;
 
@@ -97,9 +96,9 @@ namespace DebitManageSystem
         private void InputCSVForm_Load(object sender, EventArgs e)
         {
 
-            Subjects = new List<DebitInfo>();
+            InputRecords = new List<InputCSVInfo>();
 
-            bindingSource = new BindingSource(Subjects, string.Empty);
+            bindingSource = new BindingSource(InputRecords, string.Empty);
 
             ListGridView.DataSource = bindingSource;
 
@@ -122,12 +121,16 @@ namespace DebitManageSystem
             {
                 dao = new ClientTableDAO();
             }
+            else if(ItemCombo.SelectedIndex == ((int)TableItem.部門))
+            {
+                dao = new ClientTableDAO();
+            }
             else
             {
                 dao = new ClientTableDAO();
             }
 
-            var result = dao.UpdateSomeDebitRecords(Subjects);
+            var result = dao.UpdateSomeDebitRecords(InputRecords);
 
             MessageBox.Show("結果：" + result , "システム", MessageBoxButtons.OK);
 

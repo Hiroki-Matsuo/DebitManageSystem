@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
-
+using System.Collections.Generic;
 
 namespace DebitManageSystem
 {
     /// <summary>
     /// 部門テーブルに関するDAO
     /// </summary>
-    public class DepartTableDAO
+    class DepartTableDAO : IDAOBase
     {
         private static readonly string Server = "localhost";      // ホスト名
         private static readonly int Port = 3306;                  // ポート番号
@@ -25,7 +25,7 @@ namespace DebitManageSystem
         // データ登録SQL
         private static readonly string UpdateTableSql = $"Update {Database}.depart_table SET depart_name = @depart_name WHERE depart_cd = @depart_cd";
 
-        public int InsertDepartRecord(int cd, string name)
+        public int InsertRecord(int cd, string name)
         {
 
             var result = 99;
@@ -65,7 +65,6 @@ namespace DebitManageSystem
             using(debit_schemaEntities ent = new debit_schemaEntities())
             {
 
-
                 result = (from x in ent.depart_table
                           where x.depart_cd == departCd
                           select x).FirstOrDefault();
@@ -76,7 +75,7 @@ namespace DebitManageSystem
 
         }
 
-        public int UpdateDepartRecord(int cd, string name)
+        public int UpdateRecord(int cd, string name)
         {
 
             var result = 99;
@@ -102,5 +101,10 @@ namespace DebitManageSystem
 
         }
 
+        public int UpdateSomeDebitRecords(List<InputCSVInfo> debitInfos)
+        {
+
+            return 1;
+        }
     }
 }

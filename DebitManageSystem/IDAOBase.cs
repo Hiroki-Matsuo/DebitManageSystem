@@ -13,7 +13,7 @@ namespace DebitManageSystem
 
         int UpdateRecord(int cd, string name);
 
-        int UpdateSomeDebitRecords(List<DebitInfo> debitInfos);
+        int UpdateSomeDebitRecords(List<InputCSVInfo> debitInfos);
 
     }
 
