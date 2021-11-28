@@ -16,7 +16,7 @@ namespace DebitManageSystem
     public partial class ListBaseForm : BaseForm
     {
 
-        protected enum TableItem 
+        protected enum TableItem
         {
             取引先,
             部門,
@@ -42,6 +42,8 @@ namespace DebitManageSystem
         /// <param name="e"></param>
         private void ListBaseForm_Load(object sender, EventArgs e)
         {
+
+            ItemCombo.Items.Clear();
 
             foreach (TableItem item in Enum.GetValues(typeof(TableItem)))
             {

@@ -123,7 +123,7 @@ namespace DebitManageSystem
             }
             else if(ItemCombo.SelectedIndex == ((int)TableItem.部門))
             {
-                dao = new ClientTableDAO();
+                dao = new DepartTableDAO();
             }
             else
             {

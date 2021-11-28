@@ -59,7 +59,7 @@ namespace DebitManageSystem
             // 
             this.ItemCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ItemCombo.FormattingEnabled = true;
-            this.ItemCombo.Location = new System.Drawing.Point(93, 20);
+            this.ItemCombo.Location = new System.Drawing.Point(89, 20);
             this.ItemCombo.Name = "ItemCombo";
             this.ItemCombo.Size = new System.Drawing.Size(121, 20);
             this.ItemCombo.TabIndex = 8;

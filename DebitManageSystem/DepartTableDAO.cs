@@ -25,6 +25,14 @@ namespace DebitManageSystem
         // データ登録SQL
         private static readonly string UpdateTableSql = $"Update {Database}.depart_table SET depart_name = @depart_name WHERE depart_cd = @depart_cd";
 
+        // 複数更新SQL
+        private static readonly string UpdateRecordsSql_Former = $"Update {Database}.depart_table SET depart_name = CASE depart_id ";
+
+        private static readonly string UpdateRecordsSql_Later = "END WHERE depart_id IN ";
+
+        // データ登録SQL
+        private static readonly string InsertTableSqlIgnore = $"INSERT IGNORE INTO {Database}.depart_table (depart_id, depart_name) VALUES ";
+
         public int InsertRecord(int cd, string name)
         {
 
@@ -101,10 +109,95 @@ namespace DebitManageSystem
 
         }
 
-        public int UpdateSomeDebitRecords(List<InputCSVInfo> debitInfos)
+        public int UpdateSomeDebitRecords(List<InputCSVInfo> infos)
         {
 
-            return 1;
+            var result = 99;
+
+
+            var valueQueries = "";
+
+            //CASEのWHENとそれ以降
+            var whenQueries = "";
+
+            //IN句
+            var idList = "(";
+
+            //INSERTのVALUE句の作成
+            //CASE文とIN句の作成
+            foreach (InputCSVInfo info in infos)
+            {
+                //WHEN （更新対象ID） THEN　（更新するNAME）
+                whenQueries = whenQueries + "WHEN " + info.ID + " THEN " + "'" + info.Name + "' ";
+
+                if (idList.Equals("("))
+                {
+
+                    valueQueries = valueQueries + "(" + info.ID + ", '" + info.Name + "')";
+
+                    idList = idList + info.ID + " ";
+
+                }
+                else
+                {
+
+                    valueQueries = valueQueries + ", (" + info.ID + ", '" + info.Name + "')";
+
+                    idList = idList + ", " + info.ID + " ";
+
+                }
+
+            }
+
+            idList = idList + ")";
+
+            //挿入用（重複が合った場合はスルー）
+            var insertQuery = InsertTableSqlIgnore + valueQueries;
+
+            //更新用
+            var updateQuery = UpdateRecordsSql_Former + whenQueries + UpdateRecordsSql_Later + idList;
+
+            using (var conn = new MySqlConnection(ConnectionString))
+            using (var comm = new MySqlCommand())
+            {
+
+                MySqlTransaction tran = null;
+
+                try
+                {
+                    conn.Open();
+
+                    tran = conn.BeginTransaction();
+
+                    //SQLへ格納
+                    comm.Connection = conn;
+
+                    comm.CommandText = insertQuery;
+
+                    //不存在のキーを挿入
+                    comm.ExecuteNonQuery();
+
+                    comm.CommandText = updateQuery;
+
+                    comm.ExecuteNonQuery();
+
+                    tran.Commit();
+
+                    result = 0;
+
+                }
+                catch (Exception e)
+                {
+
+                    tran.Rollback();
+
+                    Console.WriteLine("  Message: {0}", e.Message);
+
+                    result = 1;
+                }
+            }
+
+            return result;
         }
     }
 }

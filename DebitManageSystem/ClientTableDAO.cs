@@ -129,7 +129,12 @@ namespace DebitManageSystem
 
         }
 
-
+        /// <summary>
+        /// 登録と更新を実行する
+        /// 登録が必要なレコードのみ登録し、差分更新を行う
+        /// </summary>
+        /// <param name="debitInfos"></param>
+        /// <returns></returns>
         public int UpdateSomeDebitRecords(List<InputCSVInfo> debitInfos)
         {
 
@@ -148,12 +153,12 @@ namespace DebitManageSystem
             //CASE文とIN句の作成
             foreach(InputCSVInfo info in debitInfos)
             {
- 
+                //WHEN （更新対象ID） THEN　（更新するNAME）
                 whenQueries = whenQueries + "WHEN " + info.ID + " THEN " + "'"+ info.Name + "' ";
 
                 if(idList.Equals("("))
                 {
-
+                    
                     valueQueries = valueQueries + "(" + info.ID + ", '" + info.Name + "')";
 
                     idList = idList + info.ID + " ";
