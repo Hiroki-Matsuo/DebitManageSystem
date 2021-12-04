@@ -26,12 +26,12 @@ namespace DebitManageSystem
         private static readonly string UpdateTableSql = $"Update {Database}.depart_table SET depart_name = @depart_name WHERE depart_cd = @depart_cd";
 
         // 複数更新SQL
-        private static readonly string UpdateRecordsSql_Former = $"Update {Database}.depart_table SET depart_name = CASE depart_id ";
+        private static readonly string UpdateRecordsSql_Former = $"Update {Database}.depart_table SET depart_name = CASE depart_cd ";
 
-        private static readonly string UpdateRecordsSql_Later = "END WHERE depart_id IN ";
+        private static readonly string UpdateRecordsSql_Later = "END WHERE depart_cd IN ";
 
         // データ登録SQL
-        private static readonly string InsertTableSqlIgnore = $"INSERT IGNORE INTO {Database}.depart_table (depart_id, depart_name) VALUES ";
+        private static readonly string InsertTableSqlIgnore = $"INSERT IGNORE INTO {Database}.depart_table (depart_cd, depart_name) VALUES ";
 
         public int InsertRecord(int cd, string name)
         {
@@ -109,7 +109,7 @@ namespace DebitManageSystem
 
         }
 
-        public int UpdateSomeDebitRecords(List<InputCSVInfo> infos)
+        public int UpdateSomeRecords(List<InputCSVInfo> infos)
         {
 
             var result = 99;
@@ -188,7 +188,7 @@ namespace DebitManageSystem
                 }
                 catch (Exception e)
                 {
-
+                    //ロールバック・軽くエラーハンドル
                     tran.Rollback();
 
                     Console.WriteLine("  Message: {0}", e.Message);

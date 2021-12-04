@@ -130,7 +130,7 @@ namespace DebitManageSystem
                 dao = new ClientTableDAO();
             }
 
-            var result = dao.UpdateSomeDebitRecords(InputRecords);
+            var result = dao.UpdateSomeRecords(InputRecords);
 
             MessageBox.Show("結果：" + result , "システム", MessageBoxButtons.OK);
 

@@ -13,15 +13,13 @@ namespace DebitManageSystem
 
         int UpdateRecord(int cd, string name);
 
-        int UpdateSomeDebitRecords(List<InputCSVInfo> debitInfos);
+        int UpdateSomeRecords(List<InputCSVInfo> infos);
 
     }
 
     interface IClientDAO
     {
         client_table SelectNameForCode(int cd);
-
-
 
     }
 }

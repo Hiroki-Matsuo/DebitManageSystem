@@ -135,7 +135,7 @@ namespace DebitManageSystem
         /// </summary>
         /// <param name="debitInfos"></param>
         /// <returns></returns>
-        public int UpdateSomeDebitRecords(List<InputCSVInfo> debitInfos)
+        public int UpdateSomeRecords(List<InputCSVInfo> debitInfos)
         {
 
             var result = 99;
