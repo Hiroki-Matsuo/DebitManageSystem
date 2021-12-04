@@ -12,6 +12,12 @@ namespace DebitManageSystem
 {
     public partial class BaseForm : Form
     {
+        protected enum Status
+        {
+            Success,
+            Fault
+        }
+
         public BaseForm()
         {
             InitializeComponent();

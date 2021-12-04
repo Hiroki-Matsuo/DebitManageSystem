@@ -13,6 +13,10 @@ namespace DebitManageSystem
 {
     public partial class InputCSVForm : ListBaseForm
     {
+        //メッセージ
+        private static readonly string SUCCEED_MESSAGE = "更新成功";
+        private static readonly string ERROR_MESSAGE = "更新エラー発生";
+
         private List<InputCSVInfo> InputRecords;
 
         BindingSource bindingSource;
@@ -65,6 +69,9 @@ namespace DebitManageSystem
             //CSVファイルのパスを開く
             StreamReader reader = new StreamReader(FilePathTextBox.Text);
             {
+                ListGridView.DataSource = null;
+
+                InputRecords.Clear();
 
                 // 配列からリストに格納する
 
@@ -76,13 +83,13 @@ namespace DebitManageSystem
                     // 読み込んだ一行をカンマ毎に分けて配列に格納する
                     string[] values = line.Split(',');
 
-                    var debitInfo = new InputCSVInfo();
+                    var csvInfo = new InputCSVInfo();
 
-                    debitInfo.ID = int.Parse(values[0]);
-                    debitInfo.Name = values[1];
+                    csvInfo.ID = int.Parse(values[0]);
+                    csvInfo.Name = values[1];
 
 
-                    InputRecords.Add(debitInfo);
+                    InputRecords.Add(csvInfo);
                 }
 
                 ListGridView.DataSource = InputRecords;
@@ -121,7 +128,7 @@ namespace DebitManageSystem
             {
                 dao = new ClientTableDAO();
             }
-            else if(ItemCombo.SelectedIndex == ((int)TableItem.部門))
+            else if(ItemCombo.SelectedIndex == (int)TableItem.部門)
             {
                 dao = new DepartTableDAO();
             }
@@ -132,8 +139,25 @@ namespace DebitManageSystem
 
             var result = dao.UpdateSomeRecords(InputRecords);
 
-            MessageBox.Show("結果：" + result , "システム", MessageBoxButtons.OK);
+            var SQLMessage ="";
+
+            if(result == (int)BaseForm.Status.Success)
+            {
+
+                SQLMessage = SUCCEED_MESSAGE;
+
+            }
+            else
+            {
+                SQLMessage = ERROR_MESSAGE;
+            }
+
+
+
+            MessageBox.Show("結果：" + SQLMessage , "システム", MessageBoxButtons.OK);
 
         }
+
+
     }
 }
