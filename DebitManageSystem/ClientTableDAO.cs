@@ -75,6 +75,27 @@ namespace DebitManageSystem
         }
 
         /// <summary>
+        /// 全件取得
+        /// </summary>
+        /// <returns></returns>
+        public List<client_table> GetClientDataAll()
+        {
+            var result = new List<client_table>();
+
+            using (debit_schemaEntities ent = new debit_schemaEntities())
+            {
+
+                result = (from x in ent.client_table
+                          select x).ToList();
+
+            }
+
+            return result;
+
+        }
+
+
+        /// <summary>
         /// 取引先コードを元に検索する
         /// </summary>
         /// <param name="cd"></param>

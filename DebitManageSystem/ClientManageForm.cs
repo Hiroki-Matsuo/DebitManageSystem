@@ -18,7 +18,11 @@ namespace DebitManageSystem
         public ClientManageForm()
         {
             InitializeComponent();
+
+            ClientGridView.DataSource = clientTableDAO.GetClientDataAll();
+
         }
+
 
         /// <summary>
         /// 画面を閉じる
@@ -46,6 +50,11 @@ namespace DebitManageSystem
 
         }
 
+        /// <summary>
+        /// 更新する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateButton_Click(object sender, EventArgs e)
         {
 
@@ -97,6 +106,23 @@ namespace DebitManageSystem
             //テキストボックスから消す
             ClientId_DisplayTextBox.Text = "";
             ClientNameTextBox.Text = "";
+
+            ClientGridView.DataSource = clientTableDAO.GetClientDataAll();
+
+        }
+
+        /// <summary>
+        /// 選択した行のデータを詳細に表示する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClientGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            ClientId_DisplayTextBox.Text = Convert.ToString(ClientGridView.CurrentRow.Cells[0].Value);
+
+            ClientNameTextBox.Text = Convert.ToString(ClientGridView.CurrentRow.Cells[1].Value);
+
 
         }
     }

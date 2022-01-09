@@ -29,6 +29,7 @@ namespace DebitManageSystem
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.EndButton = new System.Windows.Forms.Button();
             this.UpdateButton = new System.Windows.Forms.Button();
             this.ClientNameTextBox = new System.Windows.Forms.TextBox();
@@ -38,11 +39,20 @@ namespace DebitManageSystem
             this.SearchButton = new System.Windows.Forms.Button();
             this.ClientId_SearchTextBox = new System.Windows.Forms.TextBox();
             this.Title = new System.Windows.Forms.Label();
+            this.ClientGridView = new System.Windows.Forms.DataGridView();
+            this.clientidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clientnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.debittableDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clienttableBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.ClientGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clienttableBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // EndButton
             // 
-            this.EndButton.Location = new System.Drawing.Point(401, 323);
+            this.EndButton.Location = new System.Drawing.Point(431, 370);
             this.EndButton.Name = "EndButton";
             this.EndButton.Size = new System.Drawing.Size(84, 26);
             this.EndButton.TabIndex = 17;
@@ -52,7 +62,7 @@ namespace DebitManageSystem
             // 
             // UpdateButton
             // 
-            this.UpdateButton.Location = new System.Drawing.Point(12, 323);
+            this.UpdateButton.Location = new System.Drawing.Point(341, 370);
             this.UpdateButton.Name = "UpdateButton";
             this.UpdateButton.Size = new System.Drawing.Size(84, 26);
             this.UpdateButton.TabIndex = 16;
@@ -62,7 +72,7 @@ namespace DebitManageSystem
             // 
             // ClientNameTextBox
             // 
-            this.ClientNameTextBox.Location = new System.Drawing.Point(176, 202);
+            this.ClientNameTextBox.Location = new System.Drawing.Point(372, 170);
             this.ClientNameTextBox.Name = "ClientNameTextBox";
             this.ClientNameTextBox.Size = new System.Drawing.Size(113, 19);
             this.ClientNameTextBox.TabIndex = 15;
@@ -70,7 +80,7 @@ namespace DebitManageSystem
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(92, 205);
+            this.label2.Location = new System.Drawing.Point(288, 173);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 14;
@@ -78,7 +88,7 @@ namespace DebitManageSystem
             // 
             // ClientId_DisplayTextBox
             // 
-            this.ClientId_DisplayTextBox.Location = new System.Drawing.Point(176, 149);
+            this.ClientId_DisplayTextBox.Location = new System.Drawing.Point(372, 145);
             this.ClientId_DisplayTextBox.Name = "ClientId_DisplayTextBox";
             this.ClientId_DisplayTextBox.Size = new System.Drawing.Size(113, 19);
             this.ClientId_DisplayTextBox.TabIndex = 13;
@@ -86,7 +96,7 @@ namespace DebitManageSystem
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(92, 152);
+            this.label1.Location = new System.Drawing.Point(288, 148);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 12);
             this.label1.TabIndex = 12;
@@ -104,7 +114,7 @@ namespace DebitManageSystem
             // 
             // ClientId_SearchTextBox
             // 
-            this.ClientId_SearchTextBox.Location = new System.Drawing.Point(243, 56);
+            this.ClientId_SearchTextBox.Location = new System.Drawing.Point(282, 56);
             this.ClientId_SearchTextBox.Name = "ClientId_SearchTextBox";
             this.ClientId_SearchTextBox.Size = new System.Drawing.Size(113, 19);
             this.ClientId_SearchTextBox.TabIndex = 10;
@@ -120,11 +130,77 @@ namespace DebitManageSystem
             this.Title.TabIndex = 9;
             this.Title.Text = "取引先管理";
             // 
+            // ClientGridView
+            // 
+            this.ClientGridView.AutoGenerateColumns = false;
+            this.ClientGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ClientGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.clientidDataGridViewTextBoxColumn,
+            this.clientnameDataGridViewTextBoxColumn,
+            this.debittableDataGridViewTextBoxColumn});
+            this.ClientGridView.DataSource = this.clienttableBindingSource;
+            this.ClientGridView.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.ClientGridView.Location = new System.Drawing.Point(12, 127);
+            this.ClientGridView.Name = "ClientGridView";
+            this.ClientGridView.ReadOnly = true;
+            this.ClientGridView.RowTemplate.Height = 21;
+            this.ClientGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ClientGridView.Size = new System.Drawing.Size(270, 272);
+            this.ClientGridView.TabIndex = 18;
+            this.ClientGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ClientGridView_CellDoubleClick);
+            // 
+            // clientidDataGridViewTextBoxColumn
+            // 
+            this.clientidDataGridViewTextBoxColumn.DataPropertyName = "client_id";
+            this.clientidDataGridViewTextBoxColumn.HeaderText = "取引先CD";
+            this.clientidDataGridViewTextBoxColumn.Name = "clientidDataGridViewTextBoxColumn";
+            this.clientidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // clientnameDataGridViewTextBoxColumn
+            // 
+            this.clientnameDataGridViewTextBoxColumn.DataPropertyName = "client_name";
+            this.clientnameDataGridViewTextBoxColumn.HeaderText = "取引先名称";
+            this.clientnameDataGridViewTextBoxColumn.Name = "clientnameDataGridViewTextBoxColumn";
+            this.clientnameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // debittableDataGridViewTextBoxColumn
+            // 
+            this.debittableDataGridViewTextBoxColumn.DataPropertyName = "debit_table";
+            this.debittableDataGridViewTextBoxColumn.HeaderText = "debit_table";
+            this.debittableDataGridViewTextBoxColumn.Name = "debittableDataGridViewTextBoxColumn";
+            this.debittableDataGridViewTextBoxColumn.ReadOnly = true;
+            this.debittableDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // clienttableBindingSource
+            // 
+            this.clienttableBindingSource.DataSource = typeof(DebitManageSystem.client_table);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 101);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "○全件リスト";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(236, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 12);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "ID検索";
+            // 
             // ClientManageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(527, 408);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.ClientGridView);
             this.Controls.Add(this.EndButton);
             this.Controls.Add(this.UpdateButton);
             this.Controls.Add(this.ClientNameTextBox);
@@ -136,6 +212,8 @@ namespace DebitManageSystem
             this.Controls.Add(this.Title);
             this.Name = "ClientManageForm";
             this.Text = "ClientManageForm";
+            ((System.ComponentModel.ISupportInitialize)(this.ClientGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.clienttableBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,5 +230,12 @@ namespace DebitManageSystem
         private System.Windows.Forms.Button SearchButton;
         private System.Windows.Forms.TextBox ClientId_SearchTextBox;
         private System.Windows.Forms.Label Title;
+        private System.Windows.Forms.DataGridView ClientGridView;
+        private System.Windows.Forms.BindingSource clienttableBindingSource;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clientidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clientnameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn debittableDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label label4;
     }
 }
