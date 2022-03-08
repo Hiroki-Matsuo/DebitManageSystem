@@ -48,8 +48,6 @@ namespace DebitManageSystem
                 ClientNameTextBox.Text = result.client_name;
                 ClientId_DisplayTextBox.Text = ClientId_SearchTextBox.Text;
 
-
-
             }
             else
             {
