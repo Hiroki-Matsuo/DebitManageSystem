@@ -34,6 +34,11 @@ namespace DebitManageSystem
             this.Close();
         }
 
+        /// <summary>
+        /// 検索する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchButton_Click(object sender, EventArgs e)
         {
             var result = clientTableDAO.SelectNameForCode(Int32.Parse(ClientId_SearchTextBox.Text));
@@ -42,6 +47,9 @@ namespace DebitManageSystem
             {
                 ClientNameTextBox.Text = result.client_name;
                 ClientId_DisplayTextBox.Text = ClientId_SearchTextBox.Text;
+
+
+
             }
             else
             {
